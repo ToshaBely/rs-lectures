@@ -1,0 +1,187 @@
+@keyframes ball-move {
+  0% {
+    transform: translate(0, 0);
+  }
+
+  16%, 20%, 24% {
+    transform: translate(24px, -22px);
+  }
+
+  36%, 40%, 44% {
+    transform: translate(52px, -42px);
+  }
+
+  45% {
+    transform: translate(52px, -22px);
+  }
+
+  50% {
+    transform: translate(52px, 0);
+  }
+
+  66%, 70%, 74% {
+    transform: translate(28px, -22px);
+  }
+
+  86%, 90%, 94% {
+    transform: translate(0, -42px);
+  }
+
+  95% {
+    transform: translate(0, -22px);
+  }
+
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes block1-move {
+  0% {
+    height: 20px;
+  }
+
+  40% {
+    height: 20px;
+  }
+
+  45% {
+    height: 40px;
+  }
+
+  50% {
+    height: 60px;
+  }
+
+  90% {
+    height: 60px;
+  }
+
+  95% {
+    height: 40px;
+  }
+
+  100% {
+    height: 20px;
+  }
+}
+
+@keyframes block3-move {
+  0% {
+    height: 60px;
+  }
+
+  40% {
+    height: 60px;
+  }
+
+  45% {
+    height: 40px;
+  }
+
+  50% {
+    height: 20px;
+  }
+
+  90% {
+    height: 20px;
+  }
+
+  95% {
+    height: 40px;
+  }
+
+  100% {
+    height: 60px;
+  }
+}
+
+#slider {
+  /* display: none; */
+  padding: 20px 0;
+}
+
+.slider-block {
+  height: 100px;
+  width: 100px;
+  background-color: orange;
+  transition: 1s cubic-bezier(0.32, -0.65, .77, 1.31);
+}
+
+.slider-block:hover {
+  transform: translateX(400px);
+  background-color: green;
+}
+
+#wrapper {
+  /* display: none; */
+  padding-top: 30px;
+}
+
+.card {
+  display: inline-block;
+  width: 150px;
+  height: 300px;
+  margin: 20px;
+  background: lightcoral;
+  transition: 1s;
+}
+
+.card:hover {
+  background: #bada55;
+  transform: translate(25px, 5px);
+  box-shadow: -10px 0 10px grey; 
+}
+
+#container {
+  /* display: none; */
+  position: relative;
+  padding-top: 80px;
+  padding-left: 40px;
+  height: 100px;
+}
+
+#ball {
+  position: absolute;
+  bottom: 58px;
+  left: 43px;
+  width: 14px;
+  height: 14px;
+  border-radius: 8px;
+  background: lightcoral;
+
+  animation: ball-move 3s linear infinite;
+}
+
+.block {
+  display: inline-block;
+  width: 15px;
+  margin: 3px;
+  background: lightcoral;
+}
+
+#block-1 {
+  height: 20px;
+  animation: block1-move 3s linear infinite;
+}
+
+#block-2 {
+  height: 40px;
+  margin-top: 30px;
+}
+
+#block-3 {
+  height: 60px;
+  animation: block3-move 3s linear infinite;
+}
+
+#js-wrapper {
+  padding: 20px;
+}
+
+#js-slider {
+  /* display: none; */
+  width: 100px;
+  height: 100px;
+  background: peru;
+}
