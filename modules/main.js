@@ -1,6 +1,6 @@
 console.log('ES6, AirBnB, Modules');
 
-// import { test as funcFromModule, MY_FIELD, NON_NINJA } from './harmony-module';
+// import { test as funcFromModule, MY_FIELD, NOT_NINJA } from './harmony-module';
 // import myModuleFunc from './default-harmony-module';
 
 function esVariables() {
@@ -9,14 +9,14 @@ function esVariables() {
   function valueScope() {
     let a = 9;
 
-    console.log('[before "while" scope]:', a);
+    console.log('[before "if" scope]:', a);
 
     if (true) {
       let a = 2;
-      console.log('[inside "while" scope]:', a);
+      console.log('[inside "if" scope]:', a);
     }
 
-    console.log('[outside "while" scope]:', a);
+    console.log('[outside "if" scope]:', a);
   }
 
   function typicalInterviewIssue() {
@@ -24,9 +24,9 @@ function esVariables() {
 
     console.log('\nWork with var & setTimeout');
     
-    // for (var i = 0; i < 5; i++) {
-    //   setTimeout(() => console.log('var', i), 0);
-    // }
+    for (var i = 0; i < 5; i++) {
+      setTimeout(() => console.log('var', i), 0);
+    }
 
     // setTimeout(() => console.log('\nWork with let & setTimeout'), 30);
     
@@ -76,9 +76,7 @@ function esVariables() {
   }
 
   function constObject() {
-    const obj = {
-      a: 1,
-    };
+    const obj = { a: 1 };
     const array = [1, 2, 3];
 
     console.log('\n[Const object]:', obj);
@@ -110,6 +108,7 @@ function esArrowFunc() {
 
     function oldFn(arg) {
       doSomeStuff();
+
       return {
         arg,
         result: true
@@ -118,6 +117,7 @@ function esArrowFunc() {
   
     const newFn = (arg) => {
       doSomeStuff();
+
       return {
         arg,
         result: true
@@ -150,7 +150,9 @@ function esArrowFunc() {
       };
     }
   
-    const newFn = () => ({ result: false });
+    const newFn = () => ({
+      result: false,
+    });
 
     console.log('[oldFn result]:', oldFn());
     console.log('[newFn result]:', newFn());
@@ -169,8 +171,27 @@ function esArrowFunc() {
       return this;
     }
 
+    const obj = {
+      a: 5,
+      oldFn,
+      newFn
+    };
+
+    console.log('\nobjects func'); 
+    console.log('[this from oldFn]:', obj.oldFn());
+    console.log('[this from newFn]:', obj.newFn());
+
+    console.log('\nbase func with .call'); 
     console.log('[this from oldFn]:', oldFn.call({ a: 5 }));
     console.log('[this from newFn]:', newFn.call({ a: 5 }));
+
+    console.log('\nobjects func with .call'); 
+    console.log('[this from oldFn]:', obj.oldFn.call({ a: 5 }));
+    console.log('[this from newFn]:', obj.newFn.call({ a: 5 }));
+
+    console.log('\nobjects func with .call after .bind'); 
+    console.log('[this from oldFn]:', obj.oldFn.bind({status: 'binded'}).call({ a: 5 }));
+    console.log('[this from newFn]:', obj.newFn.bind({status: 'binded'}).call({ a: 5 }));
   }
 
   // fullBody();
@@ -253,7 +274,7 @@ function modules() {
     // console.log('[Get value from module]:', a.variable);
     // console.log('\n[Whole import]:', a);
 
-    console.log('\n[Whole import from default export module]:', require('./default-module'));
+    // console.log('\n[Whole import from default export module]:', require('./default-module'));
   }
 
   function useHarmony() {
@@ -261,7 +282,7 @@ function modules() {
 
     funcFromModule();
     console.log('[Field from harmony module]:', MY_FIELD);
-    console.log('[Non-Ninja field from harmony module]:', NON_NINJA);
+    console.log('[Not Ninja field from harmony module]:', NOT_NINJA);
 
     console.log('\n[Default harmony module]:', myModuleFunc());
   }

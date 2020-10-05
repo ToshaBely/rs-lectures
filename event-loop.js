@@ -24,6 +24,8 @@ function whatIsCallstack() {
 
 // talk about block
 
+// Queue:
+
 // ----STACK----
 //  ----------
 // |          |
@@ -50,7 +52,7 @@ function asyncMethod() {
       // func inner
       item => setTimeout(() => cb(item), 0)
     );
-  }  
+  }
 
   asyncForEach([1, 2, 3], (a) => console.log('async', a));
   [1, 2, 3].forEach( a => console.log(a) );
@@ -88,13 +90,28 @@ function interviewCase() {
     //   console.log('p', 1);
     //   console.log('p', 2);
     //   throw new Error('fhdjfhsdjf');
-    //   console.log('p', 3);
-    // });
+    //   resolve('p' + 3);
+    // })
+    // // .then(a => console.log(a))
+    // .catch(err => console.log('Oops'));
 
     // // Promise { state: success }
 
     console.log(4);
   }
+
+  function trickyPromise() {
+    console.log(1);
+
+    setTimeout(() => console.log(2), 0);
+
+    new Promise((res, rej) => {
+      console.log(3);
+      res(4);
+    }).then(a => console.log(a));
+
+    console.log(5);
+  }  
 
   function difficultPromiseInGame() {
     console.log(1);
@@ -112,30 +129,16 @@ function interviewCase() {
       })
       .then(a => console.log(a)); // 5
 
-      Promise.resolve(6)
-        .then(a => console.log(a));
+    Promise.resolve(6)
+      .then(a => console.log(a));
 
     console.log(7);
   }
 
-  function trickyPromise() {
-    console.log(1);
-
-    setTimeout(() => console.log(2), 0);
-
-    new Promise((res, rej) => {
-      console.log(3);
-      res(4);
-    }).then(a => console.log(a));
-
-    console.log(5);
-  }  
-  
-
   // setTimeoutOnly();
   // promiseInGame();
-  // difficultPromiseInGame();
   // trickyPromise();
+  // difficultPromiseInGame();
 }
 
 // whatIsCallstack();

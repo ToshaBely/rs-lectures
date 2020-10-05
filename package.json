@@ -13,7 +13,7 @@
     "nodemon": "^1.18.10"
   },
   "scripts": {
-    "start": "nodemon event-loop.js",
+    "start": "nodemon data-structures.js",
     "modern": "babel-node modules/main.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

@@ -34,8 +34,8 @@ function moveNode(distance, duration) {
     step();
   }
 
-  animationWithInterval();
-  // animationWithRequest();
+  // animationWithInterval();
+  animationWithRequest();
 }
 
 moveNode(510, 1000);

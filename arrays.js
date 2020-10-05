@@ -2,16 +2,16 @@ console.log('Array.prototype.*');
 
 function creation() {
   let arrayWithInitSize = new Array(4);
-  let arrayWithInitValue = Array.of(4);
-  let arrayWithPreset = new Array(5, 6);
   let arrayWithOneValue = new Array('5');
+  let arrayWithPreset = new Array(5, 6);
+  let arrayWithInitValue = Array.of(4);
   let simpleWayArray = ['a', 'b', 'c'];
 
   console.log('\nCreation:');
   console.log('arrayWithInitSize:', arrayWithInitSize);
-  console.log('arrayWithInitValue:', arrayWithInitValue);
-  console.log('arrayWithPreset:', arrayWithPreset);
   console.log('arrayWithOneValue:', arrayWithOneValue);
+  console.log('arrayWithPreset:', arrayWithPreset);
+  console.log('arrayWithInitValue:', arrayWithInitValue);
   console.log('simpleWayArray:', simpleWayArray);
 }
 
@@ -57,15 +57,16 @@ function modifyArray() {
   array = [4, 2, 1, 3];
   console.log('\n[Init before sort]:', array);
   let sorted = array.sort();
-  console.log('[After sort, reversed]:', sorted);
+  console.log('[After sort, sorted]:', sorted);
   console.log('[After sort, original array]:', array);
 
-  // OK, but...
+  console.log('\nOK, but...');
+
   array = [40, 231, 1000, 3];
   console.log('\n[Init before sort]:', array);
   console.log('WTF?', array.sort());
 
-  console.log('Set comparator', array.sort( (a, b) => a - b ));
+  // console.log('Set comparator', array.sort( (a, b) => a - b ) );
 }
 
 function workWithSplice() {
@@ -84,7 +85,7 @@ function workWithSplice() {
 
   array = [2, 3, 4, 5, 6];
   console.log('\n[Init]:', array);
-  array.splice(2, 0, 'new', 'item');
+  console.log('[splice(2, 0, `new`, `item`)]:', array.splice(2, 0, 'new', 'item'));
   console.log('[After splice(2, 0, "new", "item")]:', array);
 }
 
@@ -111,7 +112,7 @@ function search() {
   console.log('[.findIndex( ? )]',
     array.findIndex( item => false )
   );
-}
+} 
 
 function someFunction() {
   console.log('\nSome Functions');
@@ -121,6 +122,7 @@ function someFunction() {
 
   let result = array.concat(1);
   console.log('\n[.concat(1)]:', result);
+  console.log('\n[after concat]:', array);
   
   result = array.concat(10, 20);
   console.log('\n[.concat(10, 20)]:', result);
@@ -129,7 +131,7 @@ function someFunction() {
   console.log('\n[.concat([8, 9])]:', result);
 
   result = array.concat(['a', 'b'], 'c');
-  
+  // result = array.concat( [['a', 'b'], 'c'] );
   console.log('\n[.concat([a, b], c)]:', result);
 
   console.log('\n[.join()]:', result.join());
@@ -157,8 +159,8 @@ function bypass() {
     array.filter( item => !(item & 1) )
   );
 
-  console.log('\n[after .reduce( sum_func )]',
-    array.reduce( (acc, item) => acc * item )
+  console.log('\n[after .reduce( mul_func )]',
+    array.reduce( (acc, item) => acc * item, 1)
   );
 
   console.log('\n[.some( четные )]',
@@ -228,9 +230,9 @@ function interestingBypass() {
   console.log('\n[Get Pairs <AuthorID, CommentCount>]:',
     commentList
       .map( comment => comment.author.id )
-      .reduce( (acc, item) => {
-        acc[item] = (acc[item] || 0) + 1;
-        return acc;
+      .reduce( (dict, item) => {
+        dict[item] = (dict[item] || 0) + 1;
+        return dict;
       }, {})
   );
 
@@ -274,10 +276,10 @@ function workWithArrayMethods() {
 
     console.log('[ [].join ]:', [].join.call(arguments));
 
-    arguments.join = () => 'I`m join';
-    console.log('\nWTF #2 [ [].toString ]:',
-      Array.prototype.toString.call(arguments)
-    );
+    // arguments.join = () => 'Hello! I`m join';
+    // console.log('\nWTF #2 [ [].toString ]:',
+    //   Array.prototype.toString.call(arguments)
+    // );
   }
 
   fn(1, 2, 3);
@@ -303,7 +305,7 @@ function workWithGenerators() {
 
   while(!item.done) {
     console.log(item);
-    item = it.next('abc');
+    item = it.next();
   }
 
   console.log('\n[Result iterator]:', item);
@@ -317,7 +319,7 @@ function workWithGenerators() {
 // someFunction();
 // bypass();
 // interestingBypass();
-// workWithArrayLike();
+workWithArrayLike();
 // workWithArrayMethods();
 // workWithGenerators();
 

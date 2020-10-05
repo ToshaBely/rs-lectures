@@ -184,6 +184,8 @@ function workWithLinkedList() {
     }
   }
 
+  let payload = {a: 4};
+
   function addItem() {
     console.log('\n---Add Item---');
 
@@ -225,7 +227,6 @@ function workWithLinkedList() {
   // ---Creation---
   console.log('\n\n---Linked List---');
   let list = new LinkedList();
-  let payload = {a: 4};
 
   addItem();
   getItem();
@@ -752,6 +753,7 @@ function workWithSet() {
     
     console.log(set);
 
+    console.log('-------------');
     let s = new Set();
     s.add('a');
     s.add(1);
@@ -1108,6 +1110,10 @@ function workWithHeap() {
     }
 
     getFirst() {
+      if (this.last === 0) {
+        return;
+      }
+
       return this.items[1];
     }
 
@@ -1140,14 +1146,24 @@ function workWithHeap() {
           return;
         }
 
-        if ( (leftChildPos <= this.last) && (this.items[leftChildPos] < value) ) {
-          swap(currentPosition, leftChildPos);
-          currentPosition = leftChildPos;
-        } else if ( (rightChildPos <= this.last) && (this.items[rightChildPos] < value) ) {
-          swap(currentPosition, rightChildPos);
-          currentPosition = rightChildPos;
+        if ( (leftChildPos <= this.last) && (this.items[leftChildPos] < value) && (rightChildPos <= this.last) && (this.items[rightChildPos] < value) ) {
+          if (this.items[leftChildPos] < this.items[rightChildPos]) {
+            swap(currentPosition, leftChildPos);
+            currentPosition = leftChildPos;
+          } else {
+            swap(currentPosition, rightChildPos);
+            currentPosition = rightChildPos;
+          }
         } else {
-          return;
+          if ( (leftChildPos <= this.last) && (this.items[leftChildPos] < value) ) {
+            swap(currentPosition, leftChildPos);
+            currentPosition = leftChildPos;
+          } else if ( (rightChildPos <= this.last) && (this.items[rightChildPos] < value) ) {
+            swap(currentPosition, rightChildPos);
+            currentPosition = rightChildPos;
+          } else {
+            return;
+          }
         }
       }
     }
@@ -1160,10 +1176,10 @@ function workWithHeap() {
   console.log('\n\n---Min Heap---');
   let heap = new Heap();
   heap.add(31);
-  heap.add(26);
+  heap.add(19);
   heap.add(14);
   heap.add(42);
-  heap.add(19);
+  heap.add(26);
   heap.print();
 
   console.log('Min:', heap.getFirst());
